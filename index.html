@@ -1,0 +1,129 @@
+<html>
+  <!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر لوريت</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8e1e7;
+            font-family: 'Cairo', sans-serif;
+            text-align: center;
+            background-image: url('your-background-image.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 5px solid #d63384;
+            position: relative;
+        }
+        .header {
+            font-size: 28px;
+            color: #d63384;
+            font-weight: bold;
+            padding: 10px;
+            border-bottom: 2px solid #d63384;
+        }
+        .welcome-text {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        input, button, textarea {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        .upload-images {
+            border: 2px dashed #d63384;
+            padding: 20px;
+            cursor: pointer;
+            background: #fff0f5;
+            border-radius: 10px;
+        }
+        .details-box {
+            display: none;
+        }
+        .submit-btn {
+            background-color: #d63384;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 15px;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .image-preview {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .image-preview img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            margin: 5px;
+            border-radius: 10px;
+            border: 2px solid #d63384;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">متجر لوريت</div>
+        <p class="welcome-text">✨ أهلاً وسهلاً بكم في متجر لوريت، حيث تُصنع التفاصيل بحب! ✨</p>
+        
+        <input type="text" placeholder="اكتبي اسمك">
+        
+        <div class="upload-images" onclick="document.getElementById('imageInput').click()">
+            ضعي صورة الطلب هنا (يمكنك رفع 10 صور)
+        </div>
+        <input type="file" id="imageInput" multiple style="display:none" accept="image/*" onchange="handleFiles(this.files)">
+        <div class="image-preview" id="imagePreview"></div>
+        
+        <p>هل تريدين إضافة تفاصيل للطلب؟</p>
+        <button onclick="toggleDetails(true)">نعم</button>
+        <button onclick="toggleDetails(false)">لا</button>
+        
+        <div class="details-box" id="detailsBox">
+            <textarea placeholder="اكتبي التفاصيل هنا..."></textarea>
+        </div>
+        
+        <button class="submit-btn">إرسال الطلب</button>
+    </div>
+    
+    <script>
+        function toggleDetails(show) {
+            document.getElementById('detailsBox').style.display = show ? 'block' : 'none';
+        }
+        
+        function handleFiles(files) {
+            let preview = document.getElementById('imagePreview');
+            preview.innerHTML = "";
+            if (files.length > 10) {
+                alert("يمكنك تحميل 10 صور كحد أقصى");
+                return;
+            }
+            for (let i = 0; i < files.length; i++) {
+                let img = document.createElement("img");
+                img.src = URL.createObjectURL(files[i]);
+                img.onload = function() { URL.revokeObjectURL(this.src); };
+                preview.appendChild(img);
+            }
+        }
+    </script>
+</body>
+</html>
